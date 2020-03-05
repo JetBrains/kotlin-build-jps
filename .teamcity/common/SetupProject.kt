@@ -94,7 +94,6 @@ fun Project.setupKotlinProject(
         param("build.number.prefix", branchConfiguration.versionPrefix)
     }
 
-
     buildTypes += configurations.map { it.build }
 
     cleanup {
