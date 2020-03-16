@@ -17,11 +17,15 @@ class BuildIntegrityTest(
         buildStepName: String,
         kotlinVcsRoots: KotlinVcsRoots,
         buildNumberFrom: BuildType,
-        pluginVersion: String,
         pluginDownloadUrl: String
 ) : BuildType({
     this.id(id)
     this.name = buildStepName
+
+    val pluginZipFile = pluginDownloadUrl.substringAfterLast("/")
+    val pluginVersion = pluginZipFile
+            .substringAfter("kotlin-plugin-")
+            .substringBeforeLast(".zip")
 
     buildNumberPattern = "%build.number.default%"
 
@@ -98,7 +102,7 @@ class BuildIntegrityTest(
             goals = "install:install-file"
             pomLocation = ""
             runnerArgs = """
-                -Dfile=kotlin-plugin/kotlin-plugin-$pluginVersion.zip
+                -Dfile=kotlin-plugin/$pluginZipFile
                  -DgroupId=com.jetbrains.plugins -DartifactId=org.jetbrains.kotlin -Dversion=$pluginVersion -Dpackaging=zip
             """.trimIndent()
             localRepoScope = MavenBuildStep.RepositoryScope.MAVEN_DEFAULT

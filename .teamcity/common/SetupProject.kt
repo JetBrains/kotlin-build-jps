@@ -49,7 +49,6 @@ fun setupAllConfigurations(
                     buildStepName = configuration.name,
                     kotlinVcsRoots = kotlinVcsRoots,
                     buildNumberFrom = buildNumber.build,
-                    pluginVersion = projectSettings.INTEGRITY_BUILD_PLUGIN_VERSION,
                     pluginDownloadUrl = projectSettings.INTEGRITY_BUILD_PLUGIN_DOWNLOAD_URL
             )
         }
